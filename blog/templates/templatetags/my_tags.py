@@ -9,4 +9,4 @@ register = template.Library()
 def media_filter(path):
     if path:
         return f'{settings.MEDIA_URL}{path}'
-    return '#'
+    return "#"
