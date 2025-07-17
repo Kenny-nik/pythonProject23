@@ -107,3 +107,5 @@ EMAIL_HOST_USER=os.getenv("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD=os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS=os.getenv("EMAIL_USE_TLS")
 EMAIL_USE_SSL=os.getenv("EMAIL_USE_SSL")
+LOGIN_REDIRECT_URL = 'catalog:catalog_list'
+LOGOUT_REDIRECT_URL = 'catalog:catalog_list'
