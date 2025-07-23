@@ -23,4 +23,5 @@ urlpatterns = [
     ),
     path(
         "catalog/<int:pk>/delete/", ProductDeleteView.as_view(), name="delete_product"
+    )
 ]

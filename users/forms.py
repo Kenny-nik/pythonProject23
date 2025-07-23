@@ -1,6 +1,8 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import CustomUser
+from django.core.validators import validate_email
+from django.core.exceptions import ValidationError
 
 
 class StyleFormMixin:
@@ -36,3 +38,13 @@ class CustomUserCreationForm(StyleFormMixin, UserCreationForm):
         if phone_number and not phone_number.isdigit():
             raise forms.ValidationError('Номер телефона должен содержать только цифры.')
         return phone_number
+
+
+class RegistrationForm(forms.ModelForm):
+    email = forms.EmailField(validators=[validate_email])
+
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if CustomUser.objects.filter(email=email).exists():
+            raise forms.ValidationError("Этот email уже занят.")
+        return email

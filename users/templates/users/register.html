@@ -6,7 +6,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h1 class="display-4 text-center">Регистрация</h1>
+            <a href="{% url 'users:register' %}" class="btn btn-primary">Регистрация</a>
             <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
