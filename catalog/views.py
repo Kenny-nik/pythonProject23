@@ -1,13 +1,11 @@
-# from django.http import HttpResponse
 from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
-
 from catalog.forms import ProductForm
 from catalog.models import Product
-# from .forms import ProductForm
+
 
 class ProductCreateView(CreateView):
     model = Product
@@ -55,24 +53,3 @@ class ContactTemplateView(LoginRequiredMixin, TemplateView):
             print(phone)
             print(message)
             return HttpResponse('Сообщение отправлено!')
-
-
-# class ProductCreateView(CreateView):
-#     model = Product
-#     form_class = ProductForm
-#     template_name = 'catalog/product_form.html'
-#     success_url = reverse_lazy('catalog:home')
-
-
-# class ProductUpdateView(UpdateView):
-#     model = Product
-#     form_class = ProductForm
-#     template_name = 'catalog/product_form.html'
-#     success_url = reverse_lazy('catalog:home')
-#
-#
-# class ProductDeleteView(DeleteView):
-#     model = Product
-#     template_name = 'catalog/product_delete_confirm.html'
-#     success_url = reverse_lazy('catalog:home')
-#     context_object_name = 'product'

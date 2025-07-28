@@ -1,3 +1,5 @@
+from itertools import product
+
 from django import forms
 import os
 from .models import Product
@@ -25,7 +27,7 @@ class StyleFormMixin:
 class ProductForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'description', 'price', 'stock', 'image', 'category']
+        fields = ['name', 'description', 'price', 'stock', 'image', 'category', 'is_published']
 
     def clean_price(self):
         price = self.cleaned_data.get('price')
@@ -45,3 +47,8 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
             raise forms.ValidationError('Описание продукта содержит запрещенные слова.')
         return description
 
+
+class ModeratorProductForm(StyleFormMixin, forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['is_published']
