@@ -7,10 +7,10 @@
 <div class="card m-3">
   <img src="{{ product.image | media_filter }}" class="card-img-top w-50" alt="{{ product.name }}">
   <div class="card-body">
-    <h5 class="card-title">{{ product.name }}</h5>
-    <p class="lead">Цена: {{ product.price }} руб.</p>
-    <p class="card-text">{{ product.description }}</p>
-    <p class="card-text"><small class="text-body-secondary">Last updated {{ product.updated_at }}</small></p>
+    <h5 class="card-title">{{ object.name }}</h5>
+    <p class="lead">Цена: {{ object.price }} руб.</p>
+    <p class="card-text">{{ object.description }}</p>
+    <p class="card-text"><small class="text-body-secondary">Last updated {{ object.updated_at }}</small></p>
       <a href="{% url 'catalog:catalog_list' %}" class="btn btn-primary">Вернуться назад</a>
   </div>
 </div>
