@@ -5,12 +5,13 @@ from django.db.transaction import commit
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, TemplateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import ProductForm, ModeratorProductForm
 from catalog.models import Product
-
 
 
 class ProductCreateView(CreateView):
@@ -56,21 +57,20 @@ class ProductListView(LoginRequiredMixin, ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
+        cached_products=cache.get('products')
+        if cached_products:
+            return cached_products
+        products = Product.objects.all()
+        cache.set('products', products, 60*5)
         user = self.request.user
         if user.has_perm('catalog.can_unpublish_product'):
             return Product.objects.all()
         return Product.objects.filter(is_published=True)
 
 
+@method_decorator(cache_page(60*5), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
-    def my_view(request):
-        data = cache.get('my_key')
-        if not data:
-            data = 'some expensive computation'
-            cache.set('my_key', data, 60 * 15)
-        return HttpResponse(data)
-
     template_name = "catalog/product_detail.html"
     context_object_name = "product"
 
