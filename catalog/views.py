@@ -1,6 +1,6 @@
 from gc import get_objects
 from itertools import product
-
+from django.core.cache import cache
 from django.db.transaction import commit
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import redirect, get_object_or_404
@@ -10,6 +10,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import ProductForm, ModeratorProductForm
 from catalog.models import Product
+
 
 
 class ProductCreateView(CreateView):
@@ -63,6 +64,13 @@ class ProductListView(LoginRequiredMixin, ListView):
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
+    def my_view(request):
+        data = cache.get('my_key')
+        if not data:
+            data = 'some expensive computation'
+            cache.set('my_key', data, 60 * 15)
+        return HttpResponse(data)
+
     template_name = "catalog/product_detail.html"
     context_object_name = "product"
 
