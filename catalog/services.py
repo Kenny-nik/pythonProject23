@@ -10,4 +10,4 @@ class CategoryService:
 
     @staticmethod
     def get_from_categories():
-        return Product.objects.filter(category=category)
+        return Product.objects.filter(category_id=category).select_related('category')

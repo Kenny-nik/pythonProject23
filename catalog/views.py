@@ -12,6 +12,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from catalog.forms import ProductForm, ModeratorProductForm
 from catalog.models import Product
+from catalog.services import CategoryService
 
 
 class ProductCreateView(CreateView):
@@ -87,3 +88,17 @@ class ContactTemplateView(LoginRequiredMixin, TemplateView):
             print(phone)
             print(message)
             return HttpResponse('Сообщение отправлено!')
+
+
+class ProductsByCategoryView(ListView):
+    template_name = 'catalog/products_list.html'  # используем существующий шаблон
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        category = self.kwargs['pk']
+        return CategoryService(category)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'Товары категории'  # можно доработать, добавив название категории
+        return context
