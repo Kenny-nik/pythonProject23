@@ -1,0 +1,44 @@
+{% extends 'catalog/base.html' %}
+{% load my_tags %}
+{% block content %}
+<section class="py-1 text-center container">
+    <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+            <h1 class="fw-light">Магазин</h1>
+            <p class="lead text-body-secondary">Здесь можно купить или продать свой товар.</p>
+        </div>
+    </div>
+</section>
+<div class="album py-5 bg-body-tertiary">
+    <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            {% for product in object_list %}
+            <div class="col">
+                <div class="card shadow-sm">
+                    <img src="{{ product.image | media_filter }}" class="card-img-top" alt="{{ product.name }}">
+
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description|truncatechars:100 }}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href="{% url 'catalog:product_detail' product.pk %}"
+                               class="btn btn-sm btn-outline-secondary">Просмотр</a>
+                            {% if user.is_authenticated %}
+                            {% if perms.catalog.can_unpublish_product or user == product.owner %}
+                            <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-primary"
+                                role="button">Редактировать</a>
+                            <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-primary"
+                                role="button">Удалить</a>
+                            {% endif %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
