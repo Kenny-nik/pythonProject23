@@ -9,5 +9,5 @@ class CategoryService:
         return Category.objects.all()
 
     @staticmethod
-    def get_from_categories():
+    def get_from_categories(category):
         return Product.objects.filter(category_id=category).select_related('category')

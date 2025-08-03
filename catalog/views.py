@@ -96,7 +96,7 @@ class ProductsByCategoryView(ListView):
 
     def get_queryset(self):
         category = self.kwargs['pk']
-        return CategoryService(category)
+        return CategoryService.get_from_categories(category)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
