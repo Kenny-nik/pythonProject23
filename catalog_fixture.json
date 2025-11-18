@@ -1,0 +1,114 @@
+[
+{
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+        "name": "Обувь",
+        "description": "Категория обуви"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+        "name": "Телефоны",
+        "description": "Категория телефонов"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+        "name": "Обувь",
+        "description": "Категория обуви"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+        "name": "Телефоны",
+        "description": "Категория телефонов"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Обувь",
+        "description": "Категория обуви"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "name": "Телефоны",
+        "description": "Категория телефонов"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 7,
+    "fields": {
+        "name": "Обувь",
+        "description": "Категория обуви"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Айфон",
+        "description": "Техника эпл",
+        "stock": 100,
+        "category": 3,
+        "image": "",
+        "price": "50000.00",
+        "created_at": "2025-06-22",
+        "updated_at": "2025-06-22"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Адидас",
+        "description": "Кроссовки адидас",
+        "stock": 100,
+        "category": 4,
+        "image": "",
+        "price": "50000.00",
+        "created_at": "2025-06-22",
+        "updated_at": "2025-06-22"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "Айфон",
+        "description": "Техника эпл",
+        "stock": 100,
+        "category": 5,
+        "image": "",
+        "price": "50000.00",
+        "created_at": "2025-06-22",
+        "updated_at": "2025-06-22"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "Адидас",
+        "description": "Кроссовки адидас",
+        "stock": 100,
+        "category": 6,
+        "image": "",
+        "price": "50000.00",
+        "created_at": "2025-06-22",
+        "updated_at": "2025-06-22"
+    }
+}
+]
